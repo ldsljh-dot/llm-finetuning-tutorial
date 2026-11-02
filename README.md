@@ -13,6 +13,7 @@
 | 2 | [02_full_finetuning.ipynb](notebooks/02_full_finetuning.ipynb) | Hugging Face로 Qwen2.5-0.5B를 "고양이 비서" 말투로 Full 파인튜닝. SFT 데이터 만들기(답변만 loss), `Trainer`, bf16/fp16, gradient accumulation 등 메모리 절약 팁 | ✅ |
 | 3 | 03_lora_finetuning.ipynb | PEFT로 같은 작업을 LoRA로 파인튜닝하고 Full과 메모리/결과 비교 | 예정 |
 | 4 | 04_evaluation_and_next_steps.ipynb | 학습 전후 출력 비교, 모델 저장/로드, 다음 단계(QLoRA, SFT 데이터 만들기) | 예정 |
+| 5 | [05_post_training_sft_dpo_grpo.ipynb](notebooks/05_post_training_sft_dpo_grpo.ipynb) | Post-training 전체 그림(pretraining → SFT → 선호 학습 → 강화학습). TRL로 SFT, DPO(선호 학습), GRPO(강화학습) 실습, RLHF/PPO 개념 | ✅ |
 
 ## 환경 준비
 
@@ -32,6 +33,7 @@ jupyter lab
 
 CPU만 있어도 1단계는 1~2분 안에 끝납니다. 노트북은 CUDA가 있으면 자동으로 GPU를 사용합니다.
 2단계부터는 Hugging Face Hub에서 모델을 내려받으므로 인터넷 연결이 필요합니다. 2단계는 RTX 3060에서 몇 분, CPU에서는 10~30분 정도 걸리고 RAM 12GB 이상을 권장합니다.
+5단계는 TRL(`trl>=1.0`, transformers 4.56 이상 필요)을 쓰며, RTX 3060에서 10~15분, CPU에서는 30~60분 정도 걸립니다.
 
 ### GPU VRAM 확인하기
 

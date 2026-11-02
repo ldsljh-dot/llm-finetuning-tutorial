@@ -8,3 +8,6 @@ transformers>=4.46
 datasets
 accelerate
 peft
+
+# 5단계 (post-training: SFT, DPO, GRPO)
+trl>=1.0
