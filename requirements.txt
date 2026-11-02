@@ -4,7 +4,7 @@ matplotlib
 jupyterlab
 
 # 2단계 이후 (Hugging Face 실습)
-transformers>=4.40
+transformers>=4.46
 datasets
 accelerate
 peft
