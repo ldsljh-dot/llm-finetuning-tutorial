@@ -13,6 +13,7 @@
 | 2 | [02_full_finetuning.ipynb](notebooks/02_full_finetuning.ipynb) | Hugging Face로 Qwen2.5-0.5B를 "고양이 비서" 말투로 Full 파인튜닝. SFT 데이터 만들기(답변만 loss), `Trainer`, bf16/fp16, gradient accumulation 등 메모리 절약 팁 | ✅ |
 | 3 | [03_lora_finetuning.ipynb](notebooks/03_lora_finetuning.ipynb) | LoRA 원리(`W + B·A`)를 PyTorch로 직접 구현, PEFT로 같은 과제를 LoRA 학습, 어댑터 켜고 끄기, Full과 파라미터/메모리/저장 크기 비교, (선택) 12GB에서 1.5B 모델 LoRA 학습 | ✅ |
 | 4 | [04_evaluation_and_next_steps.ipynb](notebooks/04_evaluation_and_next_steps.ipynb) | 베이스/Full/LoRA를 loss·perplexity·규칙 체크로 비교 평가, greedy vs sampling, 어댑터 병합(merge)과 저장 정리, 다음 단계(QLoRA, SFT 데이터 만들기와 점검, chat template) | ✅ |
+| 5 | [05_post_training_sft_dpo_grpo.ipynb](notebooks/05_post_training_sft_dpo_grpo.ipynb) | Post-training 전체 그림(pretraining → SFT → 선호 학습 → 강화학습). TRL로 SFT, DPO(선호 학습), GRPO(강화학습) 실습, RLHF/PPO 개념 | ✅ |
 
 ## 환경 준비
 
@@ -34,6 +35,7 @@ CPU만 있어도 1단계는 1~2분 안에 끝납니다. 노트북은 CUDA가 있
 2단계부터는 Hugging Face Hub에서 모델을 내려받으므로 인터넷 연결이 필요합니다. 2단계는 RTX 3060에서 몇 분, CPU에서는 10~30분 정도 걸리고 RAM 12GB 이상을 권장합니다.
 3단계(LoRA)는 RTX 3060에서 1~2분, CPU에서 5~20분 정도입니다. 4단계는 2·3단계의 결과(`outputs/`)를 불러와 평가하므로 두 단계를 먼저 실행하세요.
 4단계의 QLoRA 예제(선택)는 NVIDIA GPU와 `pip install bitsandbytes`가 필요합니다.
+5단계는 TRL(`trl>=1.0`, transformers 4.56 이상 필요)을 쓰며, RTX 3060에서 10~15분, CPU에서는 30~60분 정도 걸립니다.
 
 ### GPU VRAM 확인하기
 
