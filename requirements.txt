@@ -1,0 +1,10 @@
+# 1단계 (기초 개념)
+torch>=2.1
+matplotlib
+jupyterlab
+
+# 2단계 이후 (Hugging Face 실습)
+transformers>=4.40
+datasets
+accelerate
+peft
