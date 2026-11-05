@@ -39,6 +39,13 @@ CPU만 있어도 1단계는 1~2분 안에 끝납니다. 노트북은 CUDA가 있
 5단계는 TRL(`trl>=1.0`, transformers 4.56 이상 필요)을 쓰며, RTX 3060에서 10~15분, CPU에서는 30~60분 정도 걸립니다.
 6단계는 Verilog 시뮬레이터 **Icarus Verilog**가 필요합니다 (`sudo apt install iverilog`, `brew install icarus-verilog`, 또는 `conda install -c conda-forge iverilog`). RTX 3060에서 30~50분, CPU에서는 1~2시간 정도 걸립니다.
 
+### Apple Silicon Mac (M1~M4)에서 실행하기
+
+- 1~5단계 노트북은 장치를 `cuda` 아니면 `cpu`로 고르므로 Mac에서는 CPU 설정(스텝 수를 줄인 설정)으로 돕니다. 학습 부분은 Hugging Face `Trainer`가 Mac GPU(`mps`)를 알아서 쓰기도 합니다.
+- 6단계 노트북은 Mac GPU(`mps`)를 직접 골라 fp32로 학습합니다. Icarus Verilog는 `brew install icarus-verilog`로 설치합니다.
+- 4단계의 QLoRA(`bitsandbytes`)는 NVIDIA GPU 전용이라 Mac에서는 돌릴 수 없습니다.
+- Mac에서는 실제로 돌려 보지 않았습니다. 문제가 생기면 알려 주세요.
+
 ### GPU VRAM 확인하기
 
 ```bash
