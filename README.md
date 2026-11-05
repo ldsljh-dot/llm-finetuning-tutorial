@@ -41,10 +41,11 @@ CPU만 있어도 1단계는 1~2분 안에 끝납니다. 노트북은 CUDA가 있
 
 ### Apple Silicon Mac (M1~M4)에서 실행하기
 
-- 1~5단계 노트북은 장치를 `cuda` 아니면 `cpu`로 고르므로 Mac에서는 CPU 설정(스텝 수를 줄인 설정)으로 돕니다. 학습 부분은 Hugging Face `Trainer`가 Mac GPU(`mps`)를 알아서 쓰기도 합니다.
-- 6단계 노트북은 Mac GPU(`mps`)를 직접 골라 fp32로 학습합니다. Icarus Verilog는 `brew install icarus-verilog`로 설치합니다.
-- 4단계의 QLoRA(`bitsandbytes`)는 NVIDIA GPU 전용이라 Mac에서는 돌릴 수 없습니다.
-- Mac에서는 실제로 돌려 보지 않았습니다. 문제가 생기면 알려 주세요.
+- 모든 노트북이 NVIDIA GPU(`cuda`) → Mac GPU(`mps`) → CPU 순서로 장치를 자동으로 고릅니다. Mac에서는 GPU 설정(스텝 수)을 쓰되 혼합 정밀도(bf16/fp16) 없이 **fp32**로 학습합니다.
+- 2단계(0.5B Full 파인튜닝)는 fp32 + AdamW라 메모리를 약 10GB 씁니다. 통합 메모리 16GB 이상을 권장하고, 부족하면 `config`의 `batch_size`를 줄이세요.
+- 4단계의 QLoRA(`bitsandbytes`)는 NVIDIA GPU 전용입니다. Mac에서는 Apple의 [MLX](https://github.com/ml-explore/mlx-lm)(`pip install mlx-lm`)로 4비트 모델 + LoRA 학습을 할 수 있습니다 (노트북에 명령 예시).
+- 6단계의 Icarus Verilog는 `brew install icarus-verilog`로 설치합니다.
+- 실행 시간은 Mac에서 측정하지 않았습니다. 문제가 생기면 알려 주세요.
 
 ### GPU VRAM 확인하기
 
