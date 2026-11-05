@@ -14,6 +14,7 @@
 | 3 | [03_lora_finetuning.ipynb](notebooks/03_lora_finetuning.ipynb) | LoRA 원리(`W + B·A`)를 PyTorch로 직접 구현, PEFT로 같은 과제를 LoRA 학습, 어댑터 켜고 끄기, Full과 파라미터/메모리/저장 크기 비교, (선택) 12GB에서 1.5B 모델 LoRA 학습 | ✅ |
 | 4 | [04_evaluation_and_next_steps.ipynb](notebooks/04_evaluation_and_next_steps.ipynb) | 베이스/Full/LoRA를 loss·perplexity·규칙 체크로 비교 평가, greedy vs sampling, 어댑터 병합(merge)과 저장 정리, 다음 단계(QLoRA, SFT 데이터 만들기와 점검, chat template) | ✅ |
 | 5 | [05_post_training_sft_dpo_grpo.ipynb](notebooks/05_post_training_sft_dpo_grpo.ipynb) | Post-training 전체 그림(pretraining → SFT → 선호 학습 → 강화학습). TRL로 SFT, DPO(선호 학습), GRPO(강화학습) 실습, RLHF/PPO 개념 | ✅ |
+| 6 | [06_rtl_post_training_codev_r1.ipynb](notebooks/06_rtl_post_training_codev_r1.ipynb) | 실전 도메인 post-training: 오픈소스 [CodeV-R1](https://github.com/IPRC-DIP/CodeV-R1)을 따라 Verilog 생성 모델 만들기. 테스트벤치 자동 생성 + iverilog 등가성 검사 보상, round-trip 데이터와 검증 필터, 증류 SFT, 난이도 필터, DAPO(adaptive DAPO) RL, pass@k | ✅ |
 
 ## 환경 준비
 
@@ -36,6 +37,7 @@ CPU만 있어도 1단계는 1~2분 안에 끝납니다. 노트북은 CUDA가 있
 3단계(LoRA)는 RTX 3060에서 1~2분, CPU에서 5~20분 정도입니다. 4단계는 2·3단계의 결과(`outputs/`)를 불러와 평가하므로 두 단계를 먼저 실행하세요.
 4단계의 QLoRA 예제(선택)는 NVIDIA GPU와 `pip install bitsandbytes`가 필요합니다.
 5단계는 TRL(`trl>=1.0`, transformers 4.56 이상 필요)을 쓰며, RTX 3060에서 10~15분, CPU에서는 30~60분 정도 걸립니다.
+6단계는 Verilog 시뮬레이터 **Icarus Verilog**가 필요합니다 (`sudo apt install iverilog`, `brew install icarus-verilog`, 또는 `conda install -c conda-forge iverilog`). RTX 3060에서 30~50분, CPU에서는 1~2시간 정도 걸립니다.
 
 ### GPU VRAM 확인하기
 
@@ -53,7 +55,7 @@ VRAM 크기에 따라 Full 파인튜닝과 LoRA 중 어떤 방식이 현실적�
 .
 ├── README.md
 ├── requirements.txt
-├── data/           # 파인튜닝용 예제 데이터 (JSONL, 2·3단계 공용)
+├── data/           # 파인튜닝용 예제 데이터 (JSONL, 2·3·5단계 냥이 데이터, 6단계 rtl_*.jsonl)
 ├── notebooks/      # 단계별 학습 노트북
 └── outputs/        # 학습한 모델이 저장되는 곳 (git에 올라가지 않음)
 ```

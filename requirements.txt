@@ -11,3 +11,6 @@ peft
 
 # 5단계 (post-training: SFT, DPO, GRPO)
 trl>=1.0
+
+# 6단계 (RTL post-training): Python 패키지는 추가 없음.
+# 시스템에 Icarus Verilog(iverilog, vvp)가 필요합니다. README의 6단계 안내 참고.
